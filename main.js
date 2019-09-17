@@ -1,13 +1,46 @@
 var player1 = new Player("Merthew", "123456");
 var player2 = new Player("Merthew2", "123456");
 
+var stars = 12;
+var flag = false;
+var direction = 1;
+var frame = 0;
+
 setInterval(() => {
-	var temp = player1.stringOut();
-	document.getElementById("body").innerHTML = temp;
+	if(frame >= 30){
+		frame = 0;
+	}
+	
+	//var temp = player1.stringOut();
+	//document.getElementById("body").innerHTML = temp;
+	var slider = document.getElementById("inputS");
+
+	stars = slider.value;
+	drawSoulSeaNum(stars);
+	if(flag == true && frame%10 == 0){
+		if(+slider.value >= +slider.max){
+			direction = -1;
+		}
+		else if(+slider.value <= +slider.min){
+			direction = 1;
+		}
+		
+		if(direction > 0){
+			slider.stepUp();
+		}
+		else {
+			slider.stepDown();
+		}
+	}
+	
+	frame ++;
 }, 1000 / 30);
 
+function slide() {
+	flag = !flag;
+}
 
-function drawSoulSea(player) {
+/*function drawSoulSea(player) {
 	
 	var canvas = document.getElementById('soulSea');
 	var ctx = canvas.getContext('2d');
@@ -30,7 +63,7 @@ function drawSoulSea(player) {
 	}
 	ctx.fill();
 	
-}
+}*/
 
 function drawSoulSeaNum(num) {
 	
@@ -52,12 +85,32 @@ function drawSoulSeaNum(num) {
 			coords.push([x,y]);
 		}
 	}
+	ctx.beginPath();
+	ctx.strokeStyle = '#ff0000';
+	ctx.lineWidth = 1;
+	for(var i = 0; i < coords.length; i++){
+		for(var j = 0; j < coords.length; j++){
+			if(i != j){
+				ctx.moveTo(coords[i][0], coords[i][1]);
+				ctx.lineTo(coords[j][0], coords[j][1]);
+			}
+		}
+	}
+	ctx.stroke();
+	ctx.closePath();
+	
+	
+	
 	ctx.fillStyle = "white";
 	ctx.beginPath();
 	for(var i = 0; i < coords.length; i++){
 		ctx.moveTo(coords[i][0], coords[i][1]);
 		ctx.arc(coords[i][0], coords[i][1], 5, 0, Math.PI * 2, true);
-	}
+	}	
 	ctx.fill();
+	ctx.closePath();
+	
+	
+	
 	
 }
