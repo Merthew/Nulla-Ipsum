@@ -11,8 +11,6 @@ setInterval(() => {
 		frame = 0;
 	}
 	
-	//var temp = player1.stringOut();
-	//document.getElementById("body").innerHTML = temp;
 	var slider = document.getElementById("inputS");
 
 	stars = slider.value;
@@ -99,8 +97,6 @@ function drawSoulSeaNum(num) {
 	ctx.stroke();
 	ctx.closePath();
 	
-	
-	
 	ctx.fillStyle = "white";
 	ctx.beginPath();
 	for(var i = 0; i < coords.length; i++){
@@ -109,8 +105,4 @@ function drawSoulSeaNum(num) {
 	}	
 	ctx.fill();
 	ctx.closePath();
-	
-	
-	
-	
 }
